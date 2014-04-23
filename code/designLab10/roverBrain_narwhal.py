@@ -17,27 +17,13 @@ def brainStart():
 def step():
     #io.setRotational(0.5)
     vNeck,vLeft,vRight,_ = io.getAnalogInputs()
-    # vNeck, vLeft, vRight = 0,0,0
-    # samples = 0
-    # while samples < 5:
-    #     lol = io.getAnalogInputs()
-    #     vNeck += lol[0]
-    #     vLeft += lol[1]
-    #     vRight += lol[2]
-    #     samples += 1
-    #     time.sleep(0.11)
-    # vNeck = vNeck/5
-    # vLeft = vLeft/5
-    # vRight = vRight/5
-
         
     #print vNeck,'Left:',vLeft,'Right:',vRight, 'Difference: ', vRight-vLeft
     #io.setForward(0)
     #io.setRotational(0)
 
-   # Non-proportional Code 
-    average = (vLeft + vRight) / 16.0
-    #print "vLeft: ", vLeft, " vRight: ", vRight
+    #move robot backwards or forwards at a rate proportional to the amount of light the photodiodes are reading
+    average = (vLeft + vRight) / 16.0 #
     print average
 
     if vLeft > 0.8 or vRight > 0.8:
@@ -56,9 +42,6 @@ def step():
         io.setRotational(0)
         io.setForward(0)
         print "light is off"
-
-    
-
     
 def brainStop():
     pass
