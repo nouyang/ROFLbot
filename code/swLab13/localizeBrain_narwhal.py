@@ -203,35 +203,6 @@ def brainStop():
 def shutdown():
     pass
 
-# def getDistanceRightAndAngle(s):
-#     sonarMaximum = 0.6
-#     print s[7], s[3]
-#     right = s[2]
-#     center = s[1]
-#     right = s[7]
-#     center = s[3]
-#     if right < sonarMaximum and center < sonarMaximum:
-#         radius = 0.089/2
-#         a = center+radius
-#         b = right+radius
-#         c = math.sqrt(a*a+b*b)
-#         if b/c > 1:
-#             return(s[2],None)
-#         phi = math.asin(a/c)
-#         d = b*math.sin(phi)
-#         if d/a > 1:
-#             return(s[2],None)
-#         alpha = math.acos(d/a)
-#         d -= radius
-#         alpha -= math.pi/2
-#         return(d, alpha)
-#     elif right < sonarMaximum:
-#         return(right, None)
-#     elif center < sonarMaximum:
-#         return(center, None)
-#     else:
-#         return(0.6, None)
-
 def getDistanceRightAndAngle(s):
     angleSpaced = 65*math.pi/180#(40+20*2)*math.pi/180
     right = s[2]
