@@ -56,63 +56,6 @@ def brainStop():
 def shutdown():
     pass
 
-# for three sensors spaced pi/3 away from each other one in the center
-# def getDistanceRightAndAngle(s):
-#     sonarMax = 1.5
-#     if s[2] < sonarMax and s[1] < sonarMax:
-#         radius = 0.089/2
-#         a = s[1]+radius
-#         print "a=", a
-#         b = s[2]+radius
-#         print "b=", b
-#         c = sqrt(a*a+b*b-2*a*b*cos(pi/3))
-#         print "c=", c
-#         if b/c > 1:
-#             return(s[2], None)
-#         phi = asin((b/c)*sin(pi/3))
-#         print "phi=", phi
-#         d = b*sin(phi)
-#         print "d=", d
-#         if d/a > 1:
-#             return(s[2],None)
-#         alpha = acos(d/a)
-#         print "alpha=", alpha
-#         d -= radius
-#         alpha -= pi/3
-#         return(d,alpha)
-#     elif s[2] < sonarMax:
-#         return(s[2], None)
-#     elif s[1] < sonarMax:
-#         return(s[1], None)
-#     else:
-#         return(1.5, None)
-
-# for three sensors spaced pi/2 away from each other one in the center
-# def getDistanceRightAndAngle(s):
-#     sonarMax = 0.8
-#     #print s[7], s[3]
-#     right = s[2]
-#     center = s[1]
-#     #right = s[7]
-#     #center = s[3]
-#     if right < sonarMax and center < sonarMax:
-#         radius = 0.089/2
-#         a = center+radius
-#         b = right+radius
-#         c = math.sqrt(a*a+b*b)
-#         phi = math.asin(a/c)
-#         d = b*math.sin(phi)
-#         alpha = math.acos(d/a)
-#         d -= radius
-#         alpha -= math.pi/2
-#         return(d, alpha)
-#     elif right < sonarMax:
-#         return(right, None)
-#     elif center < sonarMax:
-#         return(center, None)
-#     else:
-#         return(0.7, None)
-
 def getDistanceRightAndAngle(s):
     angleSpaced = 65*math.pi/180#(40+20*2)*math.pi/180
     right = s[2]
