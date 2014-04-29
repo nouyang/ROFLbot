@@ -3,63 +3,81 @@
 #include "Encoder.h"
 #include "PID_v1.h"
 
-Encoder R_Enc(2, 8); 
-Encoder L_Enc(3, 9);
-/* attaches quadrature encoders. On Romeo board pins 2 and 3 must
-   be used for interrupt support.  Each encoder must have at least
-   one interruptable pin. */
-const int motorcontrolR = 5;     //MR Speed Control pin
-const int motorcontrolL = 6;     //ML Speed Control pin
-const int MR = 4;    //MR Direction Control pin
-const int ML = 7;    //ML Direction Control pin
-const int WHEEL_D = 42; //wheel diameter in mm
-const int TICKSPERREV = 5960; //2000 for 100:1, 5960 for 298:1
-const int MMPS = PI*WHEEL_D*1000;
-unsigned long previousVTime = 0; //used for measuring velocity
-unsigned long currentVTime = 0;
-int VEL_L = 0; //velocities in mm/s
-int VEL_R = 0;
-int32_t cur_count_r = 0, cur_count_l = 0; //keeps track of encoder values
-int32_t last_count_r = 0, last_count_l = 0;
-float vel_r, vel_l; //velocities in encoder count differences
-float ticks_to_PWM = 28.5; //conversion factor to take mm/s commands from soar and change them to PWM values
+//motor pins
+const int rightMtrSpeedPin = 5;
+const int leftMtrSpeedPin = 6;
+const int rightMtrDirPin = 4;
+const int leftMtrDirPin = 7;
+
+//Encoder setup
+//each encoder must have one interrupt enabled pin see ./Encoder.h
+Encoder rightEncoder(2, 8); 
+Encoder leftEncoder(3, 9);
+int32_t encoderCountRight = 0;
+int32_t encoderCountLeft = 0;
+int32_t lastEncoderCountRight = 0;
+int32_t lastEncoderCountLeft = 0;
+
+//PID setup
+const double kp = 0.3;
+const double ki = 2.2;
+const double kd = 0.002; 
+double leftWheelDesired = 0;
+double leftWheelMeasured = 0;
+double leftWheelControl = 0;
+double leftWheelRotational = 0;
+double leftWheelLinear = 0;
+double rightWheelDesired = 0;
+double rightWheelMeasured = 0;
+double rightWheelControl = 0;
+double rightWheelRotational = 0;
+double rightWheelLinear = 0;
+PID leftWheelPID(&leftWheelMeasured, &leftWheelControl, &leftWheelDesired, kp, ki, kd, DIRECT);
+PID rightWheelPID(&rightWheelMeasured, &rightWheelControl, &rightWheelDesired, kp, ki, kd, DIRECT);
+
+//conversion factors and calculation values
+const int wheelDiameter = 42;
+const int ticksPerRev = 5960; //2000 for 100:1, 5960 for 298:1
+const int velocityConvFactor = PI*wheelDiameter*1000;
+unsigned long previousTime = 0;
+unsigned long currentTime = 0;
+float rightEncoderDelta = 0;
+float leftEncoderDelta = 0;
 /* 320RPM MOTOR: 320RPM @ 6v, so say 300 RPM at 5v = 5 rev/sec, 2000 ticks/rev of output shaft, = 10000 ticks/sec
    255/10000 = 0.0255 conversion factor for seconds * 1000 25.5 conversion factor ms */
-/* 100RPM MOTOR: 100RPM @ 6v, so say 90 RPM @ 5V, = 1.5 rev/sec, 20*298 = 5960 ticks/rev of output shaft = 8940 ticks/sec
-   255/8940 = 0.0285 conversion factor for seconds *1000 28.5 conversion factor ms */
-double SetpointLeft, InputLeft, OutputLeft, RotpointLeft, LinpointLeft; //PID setup
-double SetpointRight, InputRight, OutputRight, RotpointRight, LinpointRight;
-PID leftPID(&InputLeft, &OutputLeft, &SetpointLeft,0.3,2.2,.002, DIRECT); //kp=0.4, ki=2.2, kd=0.002
-PID rightPID(&InputRight, &OutputRight, &SetpointRight,0.3,2.2,0.002, DIRECT);
+float soarPWMConvFactor = 28.5;
 
-/* writes PWM commands to the motors takes a motor pin, a motor control pin
-   and a speed.  Negative speed means drive backwards */
-void setSpeed(int motor, int control, int speed) {
+/* writes PWM commands to the motors takes a motor control pin, a motor
+    direction pin, and a speed.  Negative speed means drive backwards. */
+void setSpeed(int direction, int control, int speed) {
   if(speed < 0) {
-    digitalWrite(motor, LOW);
-  } else digitalWrite(motor, HIGH);
+    digitalWrite(direction, LOW);
+  } else digitalWrite(direction, HIGH);
   analogWrite(control, abs(speed));
 }
 
-/* determines velocities from encoder counts and runs the PID loop */
+/* Determines wheel velocities from encoder counts and runs the PID loop */
 void drive() {
-  //update all the variables for driving and PID
-  SetpointLeft = LinpointLeft + RotpointLeft;
-  SetpointRight = LinpointRight + RotpointRight;
-  currentVTime = millis();
-  double dT = (currentVTime - previousVTime);
-  cur_count_r = -R_Enc.read();//the encoder counts are mirrored because they're on oposite sides
-  cur_count_l = L_Enc.read();
-  vel_r = cur_count_r - last_count_r;
-  vel_l = cur_count_l - last_count_l;
-  last_count_r = cur_count_r;
-  last_count_l = cur_count_l;
-  InputRight = (vel_r/dT)*ticks_to_PWM;
-  InputLeft = (vel_l/dT)*ticks_to_PWM;
-  leftPID.Compute();
-  rightPID.Compute();
-  setSpeed(MR, motorcontrolR, OutputRight); setSpeed(ML, motorcontrolL, OutputLeft);
-  VEL_R = (vel_r/(dT*TICKSPERREV))*MMPS;
-  VEL_L = (vel_l/(dT*TICKSPERREV))*MMPS;
-  previousVTime = currentVTime;
+  leftWheelDesired = leftWheelLinear + leftWheelRotational;
+  rightWheelDesired = rightWheelLinear + rightWheelRotational;
+  currentTime = millis();
+  double dT = (currentTime - previousTime);
+  
+  //The encoder counts are mirrored because they're on oposite sides.
+  //One could also switch pins in the Encoder declaration, but this seems more intuitive.
+  encoderCountRight = -rightEncoder.read();
+  encoderCountLeft = leftEncoder.read();
+  rightEncoderDelta = encoderCountRight - lastEncoderCountRight;
+  leftEncoderDelta = encoderCountLeft - lastEncoderCountLeft;
+  lastEncoderCountRight = encoderCountRight;
+  lastEncoderCountLeft = encoderCountLeft;
+  rightWheelMeasured = (rightEncoderDelta/dT)*soarPWMConvFactor;
+  leftWheelMeasured = (leftEncoderDelta/dT)*soarPWMConvFactor;
+
+  //refresh *WheelOuputs see ./PID_v1.cpp
+  leftWheelPID.Compute();
+  rightWheelPID.Compute();
+  setSpeed(rightMtrDirPin, rightMtrSpeedPin, rightWheelControl);
+  setSpeed(leftMtrDirPin, leftMtrSpeedPin, leftWheelControl);
+  previousTime = currentTime;
 }
