@@ -4,7 +4,7 @@
 //2000 for 100:1, 5960 for 298:1 0.85 is an "empirical fudge factor"
 //TODO: account for fudge factor. Mostly likely caused by inaccuracies in soarPWMConvFactor.
 const float encoderMMConvFactor = PI*wheelDiameter/(5960*0.85);
-const int robotDiameter = 89; //in mm
+const int robotDiameter = 107; //in mm
 int xpos;
 int ypos;
 float thpos;

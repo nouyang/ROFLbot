@@ -58,16 +58,16 @@ def shutdown():
 
 def getDistanceRightAndAngle(s):
     angleSpaced = 65*math.pi/180#(40+20*2)*math.pi/180
-    right = s[2]
-    center = s[1]
+    right = s[3]
+    rightCenter = s[2]
     sonarMax = 0.8
-    #print "right: ", right, " center: ", center
-    # if right > center:
-    #     return(center, 0)
-    if right < sonarMax and center < sonarMax:
-        radius = 0.089/2 #little robot radius
+    #print "right: ", right, " rightCenter: ", rightCenter
+    # if right > rightCenter:
+    #     return(rightCenter, 0)
+    if right < sonarMax and rightCenter < sonarMax:
+        radius = 0.152/2 #little robot radius
         #radius = 0.38/2 #big robot radius
-        a = center+radius
+        a = rightCenter+radius
         b = right+radius
         c = math.sqrt(a*a+b*b-(2*a*b*math.cos(angleSpaced)))
         phi = math.asin((a/c)*math.sin(angleSpaced))
@@ -86,7 +86,7 @@ def getDistanceRightAndAngle(s):
         return(d,theta)
     elif right < sonarMax:
         return(right, None)
-    elif center < sonarMax:
-        return(center, None)
+    elif rightCenter < sonarMax:
+        return(rightCenter, None)
     else:
         return(sonarMax, None)

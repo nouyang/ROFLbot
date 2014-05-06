@@ -190,7 +190,7 @@ def step():
         elif inp.odometry.theta<targetTheta-.05:
             io.Action(fvel=0,rvel=0.3).execute()  #rotate
             print "rotating"
-        elif inp.sonars[1]>.3:
+        elif inp.sonars[2]>.3:
             io.Action(fvel=0.1,rvel=0).execute()  #drive into spot
             print "driving into spot"
         else:
@@ -205,14 +205,14 @@ def shutdown():
 
 def getDistanceRightAndAngle(s):
     angleSpaced = 65*math.pi/180#(40+20*2)*math.pi/180
-    right = s[2]
-    center = s[1]
+    right = s[3]
+    center = s[2]
     sonarMax = 0.8
     #print "right: ", right, " center: ", center
     # if right > center:
     #     return(center, 0)
     if right < sonarMax and center < sonarMax:
-        radius = 0.089/2 #little robot radius
+        radius = 0.152/2 #little robot radius
         #radius = 0.38/2 #big robot radius
         a = center+radius
         b = right+radius

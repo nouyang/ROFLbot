@@ -19,21 +19,21 @@ def step():
     robot.slimeX.append(x)
     robot.slimeY.append(y)
 
-    if s[2] < 0.3: #s[2] is the right sonar
+    if s[3] < 0.3: #s[3] is the right sonar
         io.setForward(0.1)
         io.setRotational(0.4)
-    elif s[1] == 0.3 and s[2] == 0.3: #s[2] is the center sonar
+    elif s[2] == 0.3 and s[3] == 0.3: #s[2] is the right-center sonar
         io.setForward(0.05)
         io.setRotational(0)
     else:
         io.setForward(0.1)
-        if s[1] > 0.4:
+        if s[2] > 0.4:
             io.setRotational(-0.4)
-        elif s[1] < 0.3:
+        elif s[2] < 0.3:
             io.setRotational(0.5)
         else:
             io.setRotational(0)
-    print str(s[1]) + ',' + str(s[2])
+    print str(s[2]) + ',' + str(s[3])
 
 #change this line if the world file is in a different location on your system
 PATH_TO_WORLD = '/usr/local/lib/python2.7/dist-packages/soar/worlds/boundaryFollowerWorld.py'
