@@ -12,7 +12,7 @@
 
 byte receivedPkt[200];
 const int pktHeaderSize = 3;
-unsigned int sonarOrder[] = {0,1,2};
+unsigned int sonarOrder[] = {0,1,2,3};
 const int ledPin = 13;
 
 //flags and timers
@@ -149,7 +149,7 @@ void loop() {
           //turn relative to current heading counterclockwise in degrees
           break;
         case SAY:
-          //control the pieazo?
+          //control a pieazo?
           break;
         case JOYREQUEST:
           //request one (1), a continuous stream (>1), or stop (0) joystick SIPs
@@ -308,10 +308,10 @@ void loop() {
   if(millis() - sipTime > 100 && connected) { //soar expects SIPs every 100ms or so
     calculatePosition();
     if(SIPFlag) {
-      int sonarValues[3];
+      int sonarValues[sizeof(sonarOrder)/sizeof(int)];
       if(!sonarFlag) memset(sonarValues,0,sizeof(sonarValues)/sizeof(int));
       else {
-        for(int i = 0; i < sizeof(sonarValues)/sizeof(int); i++) {sonarValues[i] = readIR(sonarOrder[i]);
+        for(int i = 0; i < sizeof(sonarValues)/sizeof(int); i++) {sonarValues[i] = getIRValue(sonarOrder[i]);
         }
       }
       sendSIP(sonarOrder,sonarValues,sizeof(sonarValues)/sizeof(int));
@@ -356,9 +356,9 @@ void sendSIP(unsigned int sonarDiscs[], int sonarReadings[], size_t sonarCount) 
    the one from original pioneer OS. */
 void sendIOSIP() {
   byte IOSIPpkt[17];
-  int analog0 = analogRead(A0);
-  int analog4 = analogRead(A4);
-  int analog5 = analogRead(A5);
+  int leftPhotodiode = analogRead(A4); 
+  int rightPhotodiode = analogRead(A5); 
+  int servoPotVoltage = analogRead(A11);
   IOSIPpkt[0] = 0xF0; //packet type always 0xF0
   IOSIPpkt[1] = 0; //Analog port values resolution 0-1023 two bytes!, 0-5 VDC
   IOSIPpkt[2] = 0;
@@ -368,12 +368,12 @@ void sendIOSIP() {
   IOSIPpkt[6] = 0;
   IOSIPpkt[7] = 0;
   IOSIPpkt[8] = 0;
-  IOSIPpkt[9] = analog0&0xFF; //Analog pin 0
-  IOSIPpkt[10] = analog0>>8; 
-  IOSIPpkt[11] = analog4&0xFF; //Analog pin 4 
-  IOSIPpkt[12] = analog4>>8;
-  IOSIPpkt[13] = analog5&0xFF; //Analog pin 5
-  IOSIPpkt[14] = analog5>>8;
+  IOSIPpkt[9] = servoPotVoltage&0xFF;
+  IOSIPpkt[10] = servoPotVoltage>>8; 
+  IOSIPpkt[11] = leftPhtotodiode&0xFF;
+  IOSIPpkt[12] = leftPhotodiode>>8;
+  IOSIPpkt[13] = rightPhotodiode&0xFF;
+  IOSIPpkt[14] = rightPhotodiode>>8;
   IOSIPpkt[15] = 0;
   IOSIPpkt[16] = 0;
   sendPkt(IOSIPpkt, sizeof(IOSIPpkt));

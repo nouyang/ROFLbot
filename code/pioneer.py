@@ -146,12 +146,12 @@ class Pioneer:
       print "You are missing some serial support libraries. Probably you are on windows and you need to get pywin32. Check out http://sourceforge.net/projects/pywin32/ for details."
       raise CancelGUIAction
     self.portName = settings.SERIAL_PORT_NAME
-    self.sonarsChanged = [0,0,0]
+    self.sonarsChanged = [0,0,0,0]
     self.connectionState = STATE_NO_SYNC
     self.port = None
     self.lastxpos, self.lastypos = 0,0
-    self.storedsonars = SharedVar([0,0,0])
-    self.oldsonars = SharedVar(3*[0]) #hz
+    self.storedsonars = SharedVar([0,0,0,0])
+    self.oldsonars = SharedVar(4*[0]) #hz
     self.trans, self.rot = SharedVar(0),SharedVar(0)
     self.odpose = SharedVar((0,0,0))
     self.stalled = SharedVar(False)
@@ -204,7 +204,7 @@ class Pioneer:
       self.stopmoving()
       self.sendPacket([ArcosCmd.CLOSE])
     self.connectionState = STATE_NO_SYNC
-    self.sonarsChanged = [0,0,0]
+    self.sonarsChanged = [0,0,0,0]
     from soar.serial import Serial
     self.open(Serial)
     self.cmdEnable(1)
@@ -283,7 +283,7 @@ class Pioneer:
     self.sendPacket([ArcosCmd.OPEN])
     debug("P2OS Interface Ready - connected to "+`botName`+" "+`botType`+" "+`botSubType`,1)
     print "P2OS Interface Ready - connected to "+`botType`+`botName`
-    changed = [0,0,0]
+    changed = [0,0,0,0]
     while 0 in changed:
       self.cmdPulse()
       self.sipRecv()
@@ -506,7 +506,7 @@ class Pioneer:
     #flags       = recv[19] | (recv[20]<<8)
     #compass     = recv[21]
     sonarcount  = recv[10]
-    sonars = [-1,-1,-1]
+    sonars = [-1,-1,-1,-1]
     for i in range(sonarcount):
       num = recv[11+3*i]
       sonars[num] = recv[12+3*i] | (recv[13+3*i]<<8)
