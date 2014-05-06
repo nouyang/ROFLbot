@@ -358,7 +358,8 @@ void sendIOSIP() {
   byte IOSIPpkt[17];
   int leftPhotodiode = analogRead(A4); 
   int rightPhotodiode = analogRead(A5); 
-  int servoPotVoltage = analogRead(A11);
+  int servoPotVoltage = analogRead(A10);
+  int analog11 = analogRead(A11);
   IOSIPpkt[0] = 0xF0; //packet type always 0xF0
   IOSIPpkt[1] = 0; //Analog port values resolution 0-1023 two bytes!, 0-5 VDC
   IOSIPpkt[2] = 0;
@@ -374,8 +375,8 @@ void sendIOSIP() {
   IOSIPpkt[12] = leftPhotodiode>>8;
   IOSIPpkt[13] = rightPhotodiode&0xFF;
   IOSIPpkt[14] = rightPhotodiode>>8;
-  IOSIPpkt[15] = 0;
-  IOSIPpkt[16] = 0;
+  IOSIPpkt[15] = analog11&0xFF;
+  IOSIPpkt[16] = analog11>>8;
   sendPkt(IOSIPpkt, sizeof(IOSIPpkt));
 }
 
