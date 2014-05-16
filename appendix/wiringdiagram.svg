@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="371.51132"
+   height="265.76694"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="wiringdiagram.png">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="-7.7576202"
+     inkscape:cy="81.202"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="872"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     fit-margin-top="10"
+     fit-margin-left="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-30.307812,-72.33561)">
+    <g
+       id="g3095"
+       transform="matrix(0.3478551,0,0,0.3478551,161.62353,35.70567)">
+      <rect
+         x="23.95715"
+         y="481.68127"
+         width="637.79999"
+         height="70.865997"
+         id="rect8806"
+         style="fill:#980098" />
+      <rect
+         x="23.95715"
+         y="412.15497"
+         width="637.79999"
+         height="70.865997"
+         id="rect8807"
+         style="fill:#0000ff" />
+      <rect
+         x="23.95715"
+         y="342.62872"
+         width="637.79999"
+         height="70.865997"
+         id="rect9429"
+         style="fill:#009800" />
+      <rect
+         x="23.95715"
+         y="273.10242"
+         width="637.79999"
+         height="70.865997"
+         id="rect10051"
+         style="fill:#ffff00" />
+      <rect
+         x="23.95715"
+         y="203.57619"
+         width="637.79999"
+         height="70.865997"
+         id="rect10673"
+         style="fill:#ff9800" />
+      <rect
+         x="23.95715"
+         y="134.0499"
+         width="637.79999"
+         height="70.865997"
+         id="rect11295"
+         style="fill:#ff0000" />
+      <rect
+         x="23.95715"
+         y="551.20752"
+         width="637.79999"
+         height="70.865997"
+         id="rect11295-1"
+         style="fill:#808080" />
+      <rect
+         x="23.95715"
+         y="620.73376"
+         width="637.79999"
+         height="70.865997"
+         id="rect11295-0"
+         style="fill:#ffffff" />
+      <rect
+         x="23.95715"
+         y="690.26001"
+         width="637.79999"
+         height="70.865997"
+         id="rect11295-13"
+         style="fill:#000000" />
+      <rect
+         x="23.95715"
+         y="759.78632"
+         width="637.79999"
+         height="70.865997"
+         id="rect11295-02"
+         style="fill:#803300" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3107"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+       transform="translate(0,62.362183)"><flowRegion
+         id="flowRegion3109"><rect
+           id="rect3111"
+           width="343.57144"
+           height="256.42856"
+           x="11.428572"
+           y="7.857142"
+           style="font-size:18px" /></flowRegion><flowPara
+         id="flowPara3113"></flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3115"
+       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+       transform="translate(-180,67.362183)"><flowRegion
+         id="flowRegion3117"><rect
+           id="rect3119"
+           width="332"
+           height="450.28571"
+           x="14.285714"
+           y="11.428571" /></flowRegion><flowPara
+         id="flowPara3155"
+         style="font-size:20px;text-align:end;text-anchor:end">5V</flowPara><flowPara
+         id="flowPara3171"
+         style="font-size:20px;text-align:end;text-anchor:end">A4</flowPara><flowPara
+         id="flowPara3173"
+         style="font-size:20px;text-align:end;text-anchor:end">A5</flowPara><flowPara
+         id="flowPara3175"
+         style="font-size:20px;text-align:end;text-anchor:end">D10</flowPara><flowPara
+         id="flowPara3177"
+         style="font-size:20px;text-align:end;text-anchor:end">D12</flowPara><flowPara
+         id="flowPara3179"
+         style="font-size:20px;text-align:end;text-anchor:end">GND</flowPara><flowPara
+         id="flowPara3213"
+         style="font-size:20px;text-align:end;text-anchor:end">Right Cathode</flowPara><flowPara
+         id="flowPara3225"
+         style="font-size:20px;text-align:end;text-anchor:end">Left Cathode</flowPara><flowPara
+         id="flowPara3223"
+         style="font-size:20px;text-align:end;text-anchor:end">Left Anode</flowPara><flowPara
+         id="flowPara3217"
+         style="font-size:20px;text-align:end;text-anchor:end">Right Anode</flowPara><flowPara
+         id="flowPara3215"
+         style="font-size:20px;text-align:end;text-anchor:end" /><flowPara
+         id="flowPara3191"
+         style="font-size:20px;text-align:end;text-anchor:end" /><flowPara
+         id="flowPara3219"
+         style="font-size:20px;text-align:end;text-anchor:end" /><flowPara
+         id="flowPara3221"
+         style="font-size:20px;text-align:end;text-anchor:end" /></flowRoot>  </g>
+</svg>
