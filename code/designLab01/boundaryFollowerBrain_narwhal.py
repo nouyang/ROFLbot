@@ -19,7 +19,7 @@ def step():
     robot.slimeX.append(x)
     robot.slimeY.append(y)
 
-    if s[3] < 0.3: #s[3] is the right sonar
+    if s[3] < 0.2: #s[3] is the right sonar
         io.setForward(0.1)
         io.setRotational(0.4)
     elif s[2] == 0.3 and s[3] == 0.3: #s[2] is the right-center sonar

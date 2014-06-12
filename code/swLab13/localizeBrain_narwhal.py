@@ -204,7 +204,7 @@ def shutdown():
     pass
 
 def getDistanceRightAndAngle(s):
-    angleSpaced = 65*math.pi/180#(40+20*2)*math.pi/180
+    angleSpaced = 58*math.pi/180#(40+20*2)*math.pi/180
     right = s[3]
     center = s[2]
     sonarMax = 0.8

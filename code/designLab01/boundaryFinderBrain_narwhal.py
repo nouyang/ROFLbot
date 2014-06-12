@@ -16,11 +16,11 @@ def step():
     #s will be a list of 8 values, with the value at index
     #0 representing the left-most sonar
     s = io.getSonars()
-    print the reading from the central sonar
+    #print the reading from the central sonar
     print s[1]
     #set the robot's forward and rotational velocities to 0
     if s[1] < 0.2:
-        io.setForward(-0.20 + s[1])
+        io.setForward(-0.30 + s[1])
         print("backwards " + str(-0.20 + s[1]))
     elif s[1] == 0.2:
         io.setForward(0)

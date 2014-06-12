@@ -40,7 +40,7 @@ elif os.name == "nt":
   settings.SERIAL_PORT_NAME = "com0"
 ################################################################################
 
-MAX_TRANS, MAX_ROT = 0.2, 0.4
+MAX_TRANS, MAX_ROT = 0.15, 0.4
 # these values match the default on the robots
 #MAX_TRANS = 0.75 
 #MAX_ROT = 1.75 # on robot, 100 deg/s

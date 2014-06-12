@@ -174,7 +174,8 @@ void loop() {
           //rotate in degrees per second.  Alters leftWheelRotational and rightWheelRotational.
           if(motorsEnabled) {
             int rvel = receivedPkt[2] | (receivedPkt[3]<<8);
-            if(receivedPkt[1] == 0x1B) { //check for negative integers
+            //check for negative integers
+            if(receivedPkt[1] == 0x1B) {
               leftWheelRotational = -rvel;
               rightWheelRotational = rvel;
             } else {
@@ -371,7 +372,7 @@ void sendIOSIP() {
   IOSIPpkt[8] = 0;
   IOSIPpkt[9] = servoPotVoltage&0xFF;
   IOSIPpkt[10] = servoPotVoltage>>8; 
-  IOSIPpkt[11] = leftPhtotodiode&0xFF;
+  IOSIPpkt[11] = leftPhotodiode&0xFF;
   IOSIPpkt[12] = leftPhotodiode>>8;
   IOSIPpkt[13] = rightPhotodiode&0xFF;
   IOSIPpkt[14] = rightPhotodiode>>8;
