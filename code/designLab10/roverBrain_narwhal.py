@@ -23,20 +23,21 @@ def step():
     #io.setRotational(0)
 
     #move robot backwards or forwards at a rate proportional to the amount of light the photodiodes are reading
-    average = (vLeft + vRight) / 16.0 #
-    print average
+   
+    average = (vLeft + vRight)/2
+    print vLeft, vRight, average
 
-    if vLeft > 0.8 or vRight > 0.8:
-        io.setForward(-average+0.05)
+    if vLeft > 0.18 or vRight > 0.18:
+        io.setForward(-average/10)
         seekLight(vNeck)
         print "light is too close"
-    elif vLeft > 0.6 or vRight > 0.6:
+    elif vLeft > 0.16 or vRight > 0.16:
         seekLight(vNeck)
         io.setForward(0)
         print "TARGET IN SIGHT"
-    elif vLeft > 0.2 or vRight > 0.2:
+    elif vLeft > 0.155 or vRight > 0.155:
         seekLight(vNeck)
-        io.setForward(average)
+        io.setForward(average/10)
         print "seeking light"
     else:
         io.setRotational(0)
